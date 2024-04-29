@@ -5,9 +5,10 @@ export function isNumber(value) {
 
 export const upkeyclick = (vector,score) => {
      let modify_score = score;
-  console.log(modify_score);
-    const modify_vector = [...vector];
      
+  console.log('hey:',modify_score);
+    let modify_vector = [...vector];
+     console.log(modify_vector);
 // for(let z = 0;z<16;z++){
 //     console.log(modify_vector[z]);
 // }
@@ -18,27 +19,31 @@ export const upkeyclick = (vector,score) => {
         let k = z;
         while (i < 16) {
              
-            if (isNumber(modify_vector[i])) {
+            if (modify_vector[i]!==0) {
                 let j = i + 4;
                 let flag = 0;
                 while (j < 16) {
-                    if (isNumber(modify_vector[j])) {
+                    if (modify_vector[j]!==0) {
                         if (modify_vector[i] === modify_vector[j]) {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
-                            modify_vector[j] = '';
+                            modify_score +=  2*v;
+
+
+                            modify_vector[i] = 0;
+                            modify_vector[j] = 0;
                             modify_vector[k] = 2 * v;
-                            console.log(2*v);
-                            modify_score += modify_vector[k];
+                           
+                           
+                             
                             k = k + 4;
                             i = j + 4;
                             flag = 1;
                             break;
                         } else {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
+                            modify_vector[i] = 0;
                             modify_vector[k] = v;
-                            console.log(k);
+                            
                             i = j;
                             k = k + 4;
                             flag = 1;
@@ -50,7 +55,7 @@ export const upkeyclick = (vector,score) => {
                 }
                 if (flag === 0) {
                     let v = modify_vector[i];
-                    modify_vector[i] = '';
+                    modify_vector[i] = 0;
                     modify_vector[k] = v;
                     
                     i = i + 4;
@@ -60,10 +65,11 @@ export const upkeyclick = (vector,score) => {
             }
         }
     }
+    console.log('after:',modify_vector);
  
     let remaining = []
     for(let i = 0;i<16;i++){
-        if(isNumber(modify_vector[i])){
+        if(modify_vector[i]!==0){
 
         }
 
@@ -75,8 +81,9 @@ export const upkeyclick = (vector,score) => {
    console.log(remaining);
     let len = remaining.length;
     if (len === 0) {
+        console.log('hey')
 
-        return modify_vector;
+        return {modify_vector,modify_score};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -85,16 +92,17 @@ export const upkeyclick = (vector,score) => {
 
 
 modify_vector[remaining[newposition]] = 2;
- console.log(score);
+ console.log('hey:',modify_score);
 
     return {modify_vector,modify_score};
 };
 
 
 
-export const downkeyclick = (vector) => {
+export const downkeyclick = (vector,score) => {
      
-    const modify_vector = [...vector];
+    let modify_vector = [...vector];
+    let modify_score = score;
      
 // for(let z = 0;z<16;z++){
 //     console.log(modify_vector[z]);
@@ -106,26 +114,26 @@ export const downkeyclick = (vector) => {
         let k = i;
         while (i >= 0) {
              
-            if (isNumber(modify_vector[i])) {
+            if (modify_vector[i]!==0) {
                 let j = i - 4;
                 let flag = 0;
                 while (j>= 0) {
-                    if (isNumber(modify_vector[j])) {
+                    if (modify_vector[j]!==0) {
                         if (modify_vector[i] === modify_vector[j]) {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
-                            modify_vector[j] = '';
+                            modify_vector[i] = 0;
+                            modify_vector[j] = 0;
                             modify_vector[k] = 2 * v;
-                            
+                            modify_score += 2*v;
                             k = k - 4;
                             i = j - 4;
                             flag = 1;
                             break;
                         } else {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
+                            modify_vector[i] = 0;
                             modify_vector[k] = v;
-                            console.log(k);
+                            
                             i = j;
                             k = k - 4;
                             flag = 1;
@@ -137,7 +145,7 @@ export const downkeyclick = (vector) => {
                 }
                 if (flag === 0) {
                     let v = modify_vector[i];
-                    modify_vector[i] = '';
+                    modify_vector[i] = 0;
                     modify_vector[k] = v;
                     
                     i = i - 4;
@@ -150,7 +158,7 @@ export const downkeyclick = (vector) => {
  
     let remaining = []
     for(let i = 0;i<16;i++){
-        if(isNumber(modify_vector[i])){
+        if(modify_vector[i]!==0){
 
         }
 
@@ -163,7 +171,7 @@ export const downkeyclick = (vector) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return modify_vector;
+        return {modify_vector,modify_score};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -174,13 +182,14 @@ export const downkeyclick = (vector) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return modify_vector;
+    return {modify_vector,modify_score};
 };
 
 
-export  const leftkeyclick = (vector) => {
+export  const leftkeyclick = (vector,score) => {
      
-    const modify_vector = [...vector];
+    let modify_vector = [...vector];
+    let modify_score = score;
      
 // for(let z = 0;z<16;z++){
 //     console.log(modify_vector[z]);
@@ -193,24 +202,24 @@ export  const leftkeyclick = (vector) => {
         let k = i;
         while (i<m+4) {
              
-            if (isNumber(modify_vector[i])) {
+            if (modify_vector[i]!==0) {
                 let j = i +1 ;
                 let flag = 0;
                 while (j<m+4) {
-                    if (isNumber(modify_vector[j])) {
+                    if (modify_vector[j]!==0) {
                         if (modify_vector[i] === modify_vector[j]) {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
-                            modify_vector[j] = '';
+                            modify_vector[i] = 0;
+                            modify_vector[j] = 0;
                             modify_vector[k] = 2 * v;
-                            
+                            modify_score += 2*v;
                             k = k +1 ;
                             i = j +1;
                             flag = 1;
                             break;
                         } else {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
+                            modify_vector[i] = 0;
                             modify_vector[k] = v;
                             console.log(k);
                             i = j;
@@ -224,7 +233,7 @@ export  const leftkeyclick = (vector) => {
                 }
                 if (flag === 0) {
                     let v = modify_vector[i];
-                    modify_vector[i] = '';
+                    modify_vector[i] = 0;
                     modify_vector[k] = v;
                     
                     i = i + 1;
@@ -237,7 +246,7 @@ export  const leftkeyclick = (vector) => {
  
     let remaining = []
     for(let i = 0;i<16;i++){
-        if(isNumber(modify_vector[i])){
+        if(modify_vector[i]!==0){
 
         }
 
@@ -250,7 +259,7 @@ export  const leftkeyclick = (vector) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return modify_vector;
+        return {modify_vector,modify_score};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -261,14 +270,15 @@ export  const leftkeyclick = (vector) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return modify_vector;
+    return {modify_vector,modify_score};
 };
 
 
 
-export  const rightkeyclick = (vector) => {
+export  const rightkeyclick = (vector,score) => {
      
-    const modify_vector = [...vector];
+    let modify_vector = [...vector];
+    let modify_score = score;
      
 // for(let z = 0;z<16;z++){
 //     console.log(modify_vector[z]);
@@ -282,26 +292,26 @@ export  const rightkeyclick = (vector) => {
         let k = i;
         while (i>m) {
              
-            if (isNumber(modify_vector[i])) {
+            if (modify_vector[i]!==0) {
                 let j = i - 1 ;
                 let flag = 0;
                 while (j>m) {
-                    if (isNumber(modify_vector[j])) {
+                    if (modify_vector[j]!==0) {
                         if (modify_vector[i] === modify_vector[j]) {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
-                            modify_vector[j] = '';
+                            modify_vector[i] = 0;
+                            modify_vector[j] = 0;
                             modify_vector[k] = 2 * v;
-                            
+                            modify_score += 2*v;
                             k = k -1 ;
                             i = j -1;
                             flag = 1;
                             break;
                         } else {
                             let v = modify_vector[i];
-                            modify_vector[i] = '';
+                            modify_vector[i] = 0;
                             modify_vector[k] = v;
-                            console.log(k);
+                            
                             i = j;
                             k = k - 1;
                             flag = 1;
@@ -313,7 +323,7 @@ export  const rightkeyclick = (vector) => {
                 }
                 if (flag === 0) {
                     let v = modify_vector[i];
-                    modify_vector[i] = '';
+                    modify_vector[i] = 0;
                     modify_vector[k] = v;
                     
                     i = i - 1;
@@ -326,7 +336,7 @@ export  const rightkeyclick = (vector) => {
  
     let remaining = []
     for(let i = 0;i<16;i++){
-        if(isNumber(modify_vector[i])){
+        if(modify_vector[i]!==0){
 
         }
 
@@ -339,7 +349,7 @@ export  const rightkeyclick = (vector) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return modify_vector;
+        return {modify_vector,modify_score};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -350,5 +360,5 @@ export  const rightkeyclick = (vector) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return modify_vector;
+    return {modify_vector,modify_score};
 };
