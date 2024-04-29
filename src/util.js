@@ -83,7 +83,7 @@ export const upkeyclick = (vector,score) => {
     if (len === 0) {
         console.log('hey')
 
-        return {modify_vector,modify_score};
+        return {modify_vector,modify_score,len};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -94,7 +94,7 @@ export const upkeyclick = (vector,score) => {
 modify_vector[remaining[newposition]] = 2;
  console.log('hey:',modify_score);
 
-    return {modify_vector,modify_score};
+    return {modify_vector,modify_score,len};
 };
 
 
@@ -171,7 +171,7 @@ export const downkeyclick = (vector,score) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return {modify_vector,modify_score};
+        return {modify_vector,modify_score,len};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -182,7 +182,7 @@ export const downkeyclick = (vector,score) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return {modify_vector,modify_score};
+    return {modify_vector,modify_score,len};
 };
 
 
@@ -259,7 +259,7 @@ export  const leftkeyclick = (vector,score) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return {modify_vector,modify_score};
+        return {modify_vector,modify_score,len};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -270,7 +270,7 @@ export  const leftkeyclick = (vector,score) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return {modify_vector,modify_score};
+    return {modify_vector,modify_score,len};
 };
 
 
@@ -349,7 +349,7 @@ export  const rightkeyclick = (vector,score) => {
     let len = remaining.length;
     if (len === 0) {
 
-        return {modify_vector,modify_score};
+        return {modify_vector,modify_score,len};
     }
     
     let newposition =Math.trunc(Math.random()*len);
@@ -360,5 +360,5 @@ export  const rightkeyclick = (vector,score) => {
 modify_vector[remaining[newposition]] = 2;
  
 
-    return {modify_vector,modify_score};
+    return {modify_vector,modify_score,len};
 };

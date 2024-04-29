@@ -29,3 +29,22 @@
   padding-inline: 10px;
 
  }
+ .gameover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ }
+
+ .large_text{
+  color: black;
+  font-size: 3rem;
+  font-weight: 800;
+ }
+
+ .gameover_button{
+  padding: 4px 8px;
+  background-color: black;
+  color: white;
+  font-weight: 500;
+ }
